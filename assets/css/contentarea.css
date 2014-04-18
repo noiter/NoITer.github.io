@@ -1,19 +1,22 @@
-#overview {
-	background-color: #8085a6;
-}
-
 .left-panel {
-
+	width: 260px;
+	margin: 20px 0 0 0;
 }
 
 .right-panel {
-
+	margin: 20px 10px 0 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: #FFFFFF;
-    margin: 10px 0;
-    text-rendering: optimizelegibility;
+.subhead {
+	color: #FFFFFF;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+.jumbotron {
+	position: relative;
+	padding: 25px 0 0 0;
+	background-color: #8085a6;
 }
 
 .byline {
@@ -21,4 +24,8 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: Georgia, Times, 'Times New Roman', serif;
 	font-style: italic;
 	text-indent: 0;
+}
+
+.badge.position {
+	float: right;
 }
