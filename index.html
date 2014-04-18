@@ -1,12 +1,14 @@
 ---
-layout: default
+layout: index
 title: NoITer's bogs
 ---
 
-<p>最新文章</p>
+<h3>The latest articles</h3>
 <ul>
 	{% for post in site.posts %}
-		<li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+		<li><span>{{ post.date | date_to_string }}</span> &raquo; 
+			<a href="{{ post.url }}">{{ post.title }}</a>
+		</li>
 	{% endfor %}
 </ul>
 
