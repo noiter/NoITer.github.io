@@ -1,28 +1,25 @@
-<html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>NoITer</title>
-		<link rel="stylesheet" href="assets/css/vendor/bootstrap-responsive.min.css">
-		<link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/css/contentarea.css">
-		<script type="text/javascript" src="assets/javascript/vendor/bootstrap.min.js"></script>
-	</head>
-	<body>
-		<header class="subhead jumbotron">
-		    <div class="container">
-		      <h2>理性和有趣</h2>
-		      <blockquote>
-		        <h5 class="byline">"我对自己的要求很低：我活在世上，无非想要明白些道理，遇见些有趣的事。倘能如我所愿，我的一生的就算成功。为此也要去论是非，否则道理不给你明白，有趣的事也不让你遇到。"</h5>
-		        <h5 class="byline">——王小波</h5>
-		      </blockquote>
-		    </div>
-	  	</header>
-		<div class="container">
-		    <div class="body">
-	    	  	<p>我的博客终于开通啦！</p>
-		      	<p>感谢大家对我的博客的关注。</p>
-		    </div>
-	  </div>
-	</body>
-</html>
+---
+layout: default
+title: NoITer's bogs
+---
+
+<header class="subhead jumbotron">
+    <div class="container">
+      <h2>理性和有趣</h2>
+      <blockquote>
+        <h5 class="byline">"我对自己的要求很低：我活在世上，无非想要明白些道理，遇见些有趣的事。倘能如我所愿，我的一生的就算成功。为此也要去论是非，否则道理不给你明白，有趣的事也不让你遇到。"</h5>
+        <h5 class="byline">——王小波</h5>
+      </blockquote>
+    </div>
+</header>
+<div class="container">
+    <div class="body">
+    	<p>最新文章</p>
+    	<ul>
+    		{% for post in site.posts %}
+    			<li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+			{% endfor %}
+		</ul>
+    </div>
+</div>
 
