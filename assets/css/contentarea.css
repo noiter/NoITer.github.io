@@ -1,6 +1,12 @@
+
+/*#####################################
+CSS for Articles
+#####################################*/
+
 .left-panel {
 	width: 260px;
 	margin: 20px 0 0 0;
+	text-align: center;
 }
 
 .right-panel {
@@ -26,6 +32,7 @@
 	text-indent: 0;
 }
 
-.badge.position {
-	float: right;
+.container .body {
+	margin: 20px 10px 0 10px;
+	font-family: Georgia, Times, 'Times New Roman', serif;
 }
