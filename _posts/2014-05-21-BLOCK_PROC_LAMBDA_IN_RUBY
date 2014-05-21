@@ -1,0 +1,128 @@
+<h2>Ruby中的Block，Proc和Lambda</h2>
+
+<p>几天前在Code School上面看到有一节关于Ruby中Block，Proc和Lambda的课程，叫Ruby Bits，于是就了解了一下。学习完后，觉得有必要写一篇博客探讨Ruby中的这几种特性。</p>
+
+<h3>概念和特征</h3>
+
+<p>首先从其各自的概念以及特征上对Block，Proc和Lambda有个初步了解。</p>
+
+<h4>Block</h4>
+
+<p>对Block而言，它在Ruby中有以下几种特征，</p>
+
+<ul>
+<li>Block紧跟方法调用</li>
+<li>Block保存自己的变量环境上下文，并且是全闭包的</li>
+<li>Block有两种调用方式。一种是作为参数传递；另一种是通过 <strong><em>yield</em></strong> 关键字调用。</li>
+</ul>
+
+
+<p>如下示例代码为Block的一种使用方法，</p>
+
+<pre><code>class Array
+  def iterate!
+    self.each_with_index do |n, i|
+      self[i] = yield(n)
+    end
+  end
+end
+
+array = [1, 2, 3, 4]
+
+array.iterate! do |n|
+  n ** 2
+end
+
+puts array.inspect    # =&gt; [1, 4, 9, 16]
+</code></pre>
+
+<p>从上面对Block的描述可以看出，Block的使用非常地方便和简便。但是与此同时，我们会有这样的需求，即如果能把Block赋值给一个变量，这样我们就能方便地定义不同地Block，并且能够达到定义一次，多次调用的目的。</p>
+
+<h4>Proc</h4>
+
+<p>基于此，Proc这种机制就顺利解决了问题。<br/>
+于是，我们之前使用Block实现的代码就可以使用如下形式来重写，</p>
+
+<pre><code>class Array
+  def iterate!(func)
+    self.each_with_index do |n, i|
+      self[i] = func.call(n)
+    end
+  end
+end
+
+array_1 = [1, 2, 3, 4]
+array_2 = [2, 3, 4, 5]
+
+square = Proc.new do |n|
+  n ** 2
+end
+
+array_1.iterate!(square)
+array_2.iterate!(square)
+
+puts array_1.inspect    # =&gt; [1, 4, 9, 16]
+puts array_2.inspect    # =&gt; [4, 9, 16, 25]
+</code></pre>
+
+<h4>Lambda</h4>
+
+<p>Proc的匿名方法就是Lambda。  <br/>
+因此，我们可以不用显式地声明Proc，直接使用 <em>lambda {|n| n**2}</em> 代替。</p>
+
+<pre><code>class Array
+  def iterate!（func）
+    self.each_with_index do |n, i|
+      self[i] = func.call(n)
+    end
+  end
+end
+
+array_1 = [1, 2, 3, 4]
+
+square = lambda {|n| n ** 2 }) 
+
+array.iterate!(square)
+
+puts array.inspect    # =&gt; [1, 4, 9, 16]
+</code></pre>
+
+<p>类似于其他语言，在Ruby 1.9版本之后，我们可以直接使用关键符 <strong><em>-></em></strong> 代替直接使用 <strong><em>lambda</em></strong>。</p>
+
+<h4>Proc和Block之间的转换</h4>
+
+<p>虽然Block和Proc一般情况下均有各自独立的使用场景，但是我们也常常会使用到Block和Proc互相转化这一特性。而Ruby也提供简单的转换方式：</p>
+
+<ul>
+<li>当调用方法时，在所传递的参数之前加 <strong><em>&amp;</em></strong> ，可以将Proc转换成Block</li>
+<li>定义方法时，在方法参数前加 <strong><em>&amp;</em></strong> ，可以把Block转化成Proc</li>
+</ul>
+
+
+<p>如下示例代码即描述了第一种情况，</p>
+
+<pre><code>printer = lambda {|element| puts element}
+
+['first_element', 'second_element'].each(&amp;printer)
+</code></pre>
+
+<p>如下示例代码即描述了第一种情况，</p>
+
+<pre><code>class Array
+  def iterate!($func)
+    self.each_with_index do |n, i|
+      self[i] = func(n)
+    end
+  end
+end
+
+array = [1, 2, 3, 4]
+
+array.iterate! do |n|
+  n ** 2
+end
+
+puts array.inspect    # =&gt; [1, 4, 9, 16]
+</code></pre>
+
+<p>至此，我已经基本介绍完了Block和Proc的特性。如果大家有兴趣练手的话，可以到<a href="http://rubybits2.codeschool.com/levels/1">Ruby Bits</a>做一些基础练习。</p>
